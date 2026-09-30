@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sudeep Pandit — CS Student · AI & Software</title>
+  <meta name="description" content="Sudeep Pandit — Computer Science student & developer. Building at the intersection of software & intelligence.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v13/font/simple-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="no-scroll">
+
+  <!-- WELCOME SCREEN -->
+  <div class="welcome-screen" id="welcomeScreen" role="dialog" aria-label="Welcome">
+    <div class="welcome-text" id="welcomeText"></div>
+    <div class="welcome-bar">
+      <div class="welcome-bar-inner" id="welcomeBarInner"></div>
+    </div>
+  </div>
+
+  <canvas id="ambientCanvas" aria-hidden="true"></canvas>
+  <canvas id="wavyCursorCanvas" aria-hidden="true"></canvas>
+
+  <!-- NAVIGATION -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo" aria-label="Sudeep Pandit home">
+        <img class="logo-img" src="Sudeep Logo.png" alt="Sudeep Pandit logo">
+        <span class="logo-text">Sudeep Pandit</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" role="list">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#writing" class="nav-link">Writing</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+        <button class="btn-login" id="loginBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Log In
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#writing">Writing</a>
+    <a href="#contact">Contact</a>
+    <div class="mobile-actions">
+      <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle dark/light mode" style="width:44px; height:44px; flex-shrink:0;">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="btn-login" id="mobileLoginBtn" style="flex:1; justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/>
+          <line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Log In
+      </button>
+    </div>
+  </nav>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-label="Log in">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <h3 class="modal-title">Welcome back</h3>
+      <p class="modal-subtitle">Log in to continue to your account.</p>
+      <form class="modal-form" id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" name="loginEmail" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" name="loginPassword" autocomplete="current-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Log In
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H8M17 7v9"/>
+          </svg>
+        </button>
+      </form>
+      <p class="modal-alt">Don't have an account? <a href="#" id="signupLink">Sign up</a></p>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container" id="home">
+      <div class="hero-deco hero-deco-1"></div>
+      <div class="hero-deco hero-deco-2"></div>
+      <div class="hero-deco hero-deco-3"></div>
+      <div class="hero-content">
+        <p class="typing-greeting" id="typingGreeting" aria-label="Hello, I'm">
+          <span class="typed-text" id="typedText"></span>
+        </p>
+        <h1 class="hero-title-anim" data-animate="chars">Sudeep Pandit</h1>
+        <p class="hero-tagline word-anim" data-animate="words">Building at the intersection<br>of software &amp; intelligence.</p>
+        <p class="hero-description reveal">I'm a Computer Science student and developer exploring Artificial Intelligence, Machine Learning, software development and thoughtful digital products.</p>
+        <div class="hero-actions reveal">
+          <a href="#projects" class="btn btn-primary">
+            View my work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H8M17 7v9"/>
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-outline">Let's connect</a>
+        </div>
+        <div class="hero-meta reveal">
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/>
+            </svg>
+            Based in Kathmandu, Nepal
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>
+            </svg>
+            CS Student &amp; Developer
+          </div>
+        </div>
+        <div class="hero-scroll reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 5v14M19 12l-7 7-7-7"/>
+          </svg>
+          Scroll to explore
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section container" id="about">
+      <div class="reveal-left">
+        <span class="section-number">01</span>
+        <h2 class="section-title">Curious about how<br>things work.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <p>I'm a Computer Science student based in Nepal, focused on building software that solves real-world problems and exploring how artificial intelligence can make those solutions smarter and more effective.</p>
+          <p>My work combines full-stack development, software systems, and AI — from building school and NGO management platforms to developing web applications and experimenting with machine learning and intelligent systems. I enjoy taking an idea from concept to a practical, user-focused product.</p>
+          <p>I'm continuously expanding my skills across software engineering and AI, with a particular interest in building intelligent, scalable, and responsible technologies that create meaningful impact.</p>
+          <p>Beyond coding, I enjoy exploring design, learning new technologies, and thinking about how software can become more useful, accessible, and human-centered.</p>
+        </div>
+        <div class="about-facts reveal-stagger reveal-right">
+          <div class="fact-item"><span class="fact-label">Focus</span><span class="fact-value">AI &amp; Machine Learning</span></div>
+          <div class="fact-item"><span class="fact-label">Building</span><span class="fact-value">Web &amp; Digital Products</span></div>
+          <div class="fact-item"><span class="fact-label">Exploring</span><span class="fact-value">Software Engineering</span></div>
+          <div class="fact-item"><span class="fact-label">Location</span><span class="fact-value">Kathmandu, Nepal</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section container" id="projects">
+      <div class="reveal-left">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Things I've<br>been building.</h2>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section container" id="experience">
+      <div class="reveal-left">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Where I've<br>contributed.</h2>
+      </div>
+      <div class="timeline" id="experienceTimeline"></div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section container" id="education">
+      <div class="reveal-left">
+        <span class="section-number">04</span>
+        <h2 class="section-title">Learning never<br>really stops.</h2>
+      </div>
+      <div class="timeline" id="educationTimeline"></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section container" id="skills">
+      <div class="reveal-left">
+        <span class="section-number">05</span>
+        <h2 class="section-title">Technologies I'm<br>working with.</h2>
+      </div>
+
+      <div class="skills-grid reveal-stagger reveal" id="skillsGrid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <div class="skill-icons">
+            <div class="tech-chip"><i class="si si-python"></i><span class="chip-name">Python</span></div>
+            <div class="tech-chip"><i class="si si-javascript"></i><span class="chip-name">JavaScript</span></div>
+            <div class="tech-chip"><i class="si si-typescript"></i><span class="chip-name">TypeScript</span></div>
+            <div class="tech-chip"><i class="si si-java"></i><span class="chip-name">Java</span></div>
+            <div class="tech-chip"><i class="si si-c"></i><span class="chip-name">C</span></div>
+            <div class="tech-chip"><i class="si si-html5"></i><span class="chip-name">HTML5</span></div>
+            <div class="tech-chip"><i class="si si-css3"></i><span class="chip-name">CSS3</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Frameworks &amp; Libraries</h3>
+          <div class="skill-icons">
+            <div class="tech-chip"><i class="si si-react"></i><span class="chip-name">React</span></div>
+            <div class="tech-chip"><i class="si si-nodedotjs"></i><span class="chip-name">Node.js</span></div>
+            <div class="tech-chip"><i class="si si-express"></i><span class="chip-name">Express</span></div>
+            <div class="tech-chip"><i class="si si-flask"></i><span class="chip-name">Flask</span></div>
+            <div class="tech-chip"><i class="si si-tailwindcss"></i><span class="chip-name">Tailwind CSS</span></div>
+            <div class="tech-chip"><i class="si si-bootstrap"></i><span class="chip-name">Bootstrap</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>AI / Machine Learning</h3>
+          <div class="skill-icons">
+            <div class="tech-chip"><i class="si si-tensorflow"></i><span class="chip-name">TensorFlow</span></div>
+            <div class="tech-chip"><i class="si si-pytorch"></i><span class="chip-name">PyTorch</span></div>
+            <div class="tech-chip"><i class="si si-scikitlearn"></i><span class="chip-name">scikit-learn</span></div>
+            <div class="tech-chip"><i class="si si-pandas"></i><span class="chip-name">Pandas</span></div>
+            <div class="tech-chip"><i class="si si-numpy"></i><span class="chip-name">NumPy</span></div>
+            <div class="tech-chip"><i class="si si-openai"></i><span class="chip-name">OpenAI API</span></div>
+            <div class="tech-chip"><i class="si si-huggingface"></i><span class="chip-name">Hugging Face</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Databases &amp; Cloud</h3>
+          <div class="skill-icons">
+            <div class="tech-chip"><i class="si si-postgresql"></i><span class="chip-name">PostgreSQL</span></div>
+            <div class="tech-chip"><i class="si si-mongodb"></i><span class="chip-name">MongoDB</span></div>
+            <div class="tech-chip"><i class="si si-mysql"></i><span class="chip-name">MySQL</span></div>
+            <div class="tech-chip"><i class="si si-sqlite"></i><span class="chip-name">SQLite</span></div>
+            <div class="tech-chip"><i class="si si-firebase"></i><span class="chip-name">Firebase</span></div>
+            <div class="tech-chip"><i class="si si-amazonaws"></i><span class="chip-name">AWS</span></div>
+            <div class="tech-chip"><i class="si si-vercel"></i><span class="chip-name">Vercel</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Tools &amp; DevOps</h3>
+          <div class="skill-icons">
+            <div class="tech-chip"><i class="si si-git"></i><span class="chip-name">Git</span></div>
+            <div class="tech-chip"><i class="si si-github"></i><span class="chip-name">GitHub</span></div>
+            <div class="tech-chip"><i class="si si-docker"></i><span class="chip-name">Docker</span></div>
+            <div class="tech-chip"><i class="si si-linux"></i><span class="chip-name">Linux</span></div>
+            <div class="tech-chip"><i class="si si-postman"></i><span class="chip-name">Postman</span></div>
+            <div class="tech-chip"><i class="si si-graphql"></i><span class="chip-name">GraphQL</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Graphics &amp; Motion Design</h3>
+          <div class="skill-icons">
+            <div class="tech-chip"><i class="si si-adobephotoshop"></i><span class="chip-name">Photoshop</span></div>
+            <div class="tech-chip"><i class="si si-adobepremierepro"></i><span class="chip-name">Premiere Pro</span></div>
+            <div class="tech-chip"><i class="si si-adobeaftereffects"></i><span class="chip-name">After Effects</span></div>
+            <div class="tech-chip"><i class="si si-adobeillustrator"></i><span class="chip-name">Illustrator</span></div>
+            <div class="tech-chip"><i class="si si-adobeindesign"></i><span class="chip-name">InDesign</span></div>
+            <div class="tech-chip"><i class="si si-adobexd"></i><span class="chip-name">Adobe XD</span></div>
+            <div class="tech-chip"><i class="si si-figma"></i><span class="chip-name">Figma</span></div>
+            <div class="tech-chip"><i class="si si-blender"></i><span class="chip-name">Blender</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section class="section container" id="writing">
+      <div class="reveal-left">
+        <span class="section-number">06</span>
+        <h2 class="section-title">Notes from<br>the journey.</h2>
+      </div>
+      <div class="writing-list" id="writingList"></div>
+      <div class="reveal">
+        <a href="#" class="btn btn-outline" id="viewAllWriting">
+          View all writing
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section container" id="contact">
+      <div class="reveal-left">
+        <h2 class="contact-heading">Let's build something <span class="accent-word" id="accentWord">meaningful.</span></h2>
+        <p class="contact-description">Have an idea, opportunity, project or simply want to talk about technology?</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal-left">
+          <div class="contact-links">
+            <a href="mailto:info@sudeeppandit.com.np" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>
+              </svg>
+              info@sudeeppandit.com.np
+            </a>
+            <a href="https://www.linkedin.com/in/sudeep-pandit-857309313/" class="contact-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+                <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/sudeep-pandit" class="contact-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+              </svg>
+              GitHub
+            </a>
+            <a href="https://www.instagram.com/su_de_eep/" class="contact-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+        <form class="contact-form reveal-right" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <span class="form-error" id="nameError">Please enter your name.</span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <span class="form-error" id="emailError">Please enter a valid email address.</span>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <span class="form-error" id="messageError">Please write a message.</span>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Send message
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H8M17 7v9"/>
+            </svg>
+          </button>
+          <div class="form-message" id="formMessage">
+            Sorry ! I can't receive messages at the moment.
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="container">
+    <div class="footer-content reveal-stagger reveal">
+      <p class="footer-tagline">Building, learning &amp; exploring technology.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
